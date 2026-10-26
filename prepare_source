@@ -1,0 +1,4 @@
+version_orig=24.22.0+dfsg+~cs24.19.2
+version="$version_orig-2"
+git_src -b "debian/24.22.0+dfsg+_cs24.19.2-2" "https://salsa.debian.org/js-team/nodejs.git"
+version_suffix=gl0~bp2150
