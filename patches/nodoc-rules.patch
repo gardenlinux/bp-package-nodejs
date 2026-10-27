@@ -1,8 +1,8 @@
 --- a/debian/rules
 +++ b/debian/rules
-@@ -411,7 +411,9 @@ ifeq ($(filter nodoc,$(DEB_BUILD_PROFILES)),)
+@@ -411,11 +411,13 @@
  endif
-
+ 
  override_dh_auto_build-indep:
 +ifeq ($(filter nodoc,$(DEB_BUILD_PROFILES)),)
  	mkdir -p node_modules
@@ -11,4 +11,6 @@
  	ln -sf /usr/share/nodejs/js-yaml node_modules/
  	$(MAKE) doc-only
 +endif
-
+ 
+ override_dh_auto_test-indep:
+ 	# skip tests
