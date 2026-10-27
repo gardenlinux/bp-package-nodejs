@@ -1,6 +1,14 @@
 --- a/debian/rules
 +++ b/debian/rules
-@@ -392,6 +392,7 @@
+@@ -58,6 +58,7 @@
+ 
+ ifneq ($(filter pkg.nodejs.nobuiltin,$(DEB_BUILD_PROFILES)),)
+ 	DEB_CONFIGURE_EXTRA_FLAGS += --node-builtin-modules-path=$(builtins)
++	DEB_CONFIGURE_EXTRA_FLAGS += --shared-builtin-minimatch-path=/usr/share/nodejs/minimatch/index.cjs
+ endif
+ 
+ # map HOST ARCH AND OS, and if unknown let upstream guess
+@@ -392,6 +393,7 @@
  
  execute_before_dh_auto_build-arch:
  	mkdir -p deps/openssl/ && touch deps/openssl/nodejs-openssl.cnf
@@ -8,7 +16,7 @@
  	# acorn
  	pkver=`dpkg-query --showformat='$${source:Upstream-Version}' --show node-acorn | sed -E 's/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/g'`; \
  	cp src/acorn_version.h src/acorn_version.h.bak; \
-@@ -402,6 +403,7 @@
+@@ -402,6 +404,7 @@
  	sed -i -e "s/[0-9]\+\.[0-9]\+\.[0-9]\+/$${pkver}/" src/undici_version.h
  	mkdir -p deps/minimatch
  	esbuild --platform=node --bundle /usr/share/nodejs/minimatch/index.cjs > deps/minimatch/index.js
