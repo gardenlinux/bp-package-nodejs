@@ -8,6 +8,7 @@ jobs:
     uses: gardenlinux/package-build/.github/workflows/build.yml@main
     with:
       release: ${{ github.ref == 'refs/heads/main' }}
+      force-arm-build: true
       build_dep: |
         gardenlinux/bp-package-ada-url 3.4.4-1gl0+bp2150
         gardenlinux/bp-package-libuv1 1.53.0-1gl0+bp2150
