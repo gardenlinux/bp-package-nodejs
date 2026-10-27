@@ -2,9 +2,11 @@ version_orig=24.22.0+dfsg+~cs24.19.2
 version="$version_orig-2"
 git_src -b "debian/24.22.0+dfsg+_cs24.19.2-2" "https://salsa.debian.org/js-team/nodejs.git"
 
-# Remove build deps that are unavailable in the rel-2150 snapshot
+# Remove build deps unavailable in the rel-2150 snapshot
 sed -i '/<!pkg.nodejs.nobuiltin>/d' "$dir/src/debian/control"
 sed -i '/<!nodoc>/d' "$dir/src/debian/control"
 sed -i '/<!nocheck>/d' "$dir/src/debian/control"
+
+apply_patches
 
 version_suffix=gl0~bp2150

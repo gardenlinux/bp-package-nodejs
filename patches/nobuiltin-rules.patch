@@ -1,0 +1,17 @@
+--- a/debian/rules
++++ b/debian/rules
+@@ -393,12 +393,14 @@ endif
+ execute_before_dh_auto_build-arch:
+ 	mkdir -p deps/openssl/ && touch deps/openssl/nodejs-openssl.cnf
++ifeq ($(filter pkg.nodejs.nobuiltin,$(DEB_BUILD_PROFILES)),)
+ 	# acorn
+ 	pkver=`dpkg-query --showformat='$${source:Upstream-Version}' --show node-acorn | sed -E 's/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/g'`; \
+ 	cp src/acorn_version.h src/acorn_version.h.bak; \
+ 	sed -i -e "s/[0-9]\+\.[0-9]\+\.[0-9]\+/$${pkver}/" src/acorn_version.h
+ 	# undici
+ 	pkver=`dpkg-query --showformat='$${source:Upstream-Version}' --show node-undici | sed -E 's/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/g'`; \
+ 	cp src/undici_version.h src/undici_version.h.bak; \
+ 	sed -i -e "s/[0-9]\+\.[0-9]\+\.[0-9]\+/$${pkver}/" src/undici_version.h
+ 	mkdir -p deps/minimatch
+ 	esbuild --platform=node --bundle /usr/share/nodejs/minimatch/index.cjs > deps/minimatch/index.js
++endif
